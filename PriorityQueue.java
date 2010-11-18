@@ -22,6 +22,9 @@ class PriorityQueue {
     
   }
   
+  /*
+   * HeapComparator accepterar ett argument som bestämmer huruvida elementen ordnas i stigande eller i fallande ordning.
+   */
   private class HeapComparator implements Comparator<Integer> {
     private boolean desc;
     public HeapComparator(boolean desc) {
