@@ -19,6 +19,7 @@ public class AHeap {
   
   public AHeap(Comparator comparator){
     this.comparator = comparator;
+    size = 0;
   }
   
   public void add(Node n){
@@ -41,7 +42,7 @@ public class AHeap {
     if (index <= size && index > 0)
       return list[index];
     } else {
-      throw new IndexOutOfBoundsException("Error in: get")
+      throw new IndexOutOfBoundsException("Error in: get");
     }
   }
   
@@ -56,10 +57,15 @@ public class AHeap {
   }
   
   private void delete(int index){
+    /* Kopierar den sista noden till det givna indexet */
     Node lastNode = list[size];
     list[index] = lastNode;
+    
+    /* Sparar undan den flyttade nodens index i positionsmappen */
     positionMap.put(lastNode,index);
     size--;
+    
+    /* Ser till att den flyttade noden ligger på rätt ställe */
     bubbleDown(lastNode);
     bubbleUp(lastNode);
   }
