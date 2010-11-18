@@ -56,7 +56,12 @@ public class AHeap {
   }
   
   private void delete(int index){
-    
+    Node lastNode = list[size];
+    list[index] = lastNode;
+    positionMap.put(lastNode,index);
+    size--;
+    bubbleDown(lastNode);
+    bubbleUp(lastNode);
   }
   
   private void swap(Node a, Node b){
