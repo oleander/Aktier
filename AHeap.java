@@ -11,7 +11,7 @@ public class AHeap {
   private Comparator comparator;
   private ArrayList<Node> list;
   private int size;
-  private HashMap<String,Integer> positionMap;
+  private HashMap<Node,Integer> positionMap;
   
   /**
    * @param comparator komparatorn som bestämmer vilket element är högst prioriterat
@@ -24,7 +24,7 @@ public class AHeap {
   
   public void add(Node n){
     size++;
-    list[size] = n;
+    list.set(size, n);
     positionMap.put(n,size);
   }
   
@@ -39,8 +39,8 @@ public class AHeap {
   }
   
   public Node get(int index){
-    if (index <= size && index > 0)
-      return list[index];
+    if (index <= size && index > 0) {
+      return list.get(index);
     } else {
       throw new IndexOutOfBoundsException("Error in: get");
     }
@@ -48,18 +48,18 @@ public class AHeap {
   
   public void update(Node old, Node update) throws GeneralException {
     if (positionMap.get(old) == null) {
-      throw new GeneralException("Error in update: Node not found!")
+      throw new GeneralException("Error in update: Node not found!");
     } else {
     int index = positionMap.get(old);
-    list[index] = update;
-    bubble(list[index]);
+    list.set(index, update);
+    bubble(list.get(index));
     }
   }
   
   private void delete(int index){
     /* Kopierar den sista noden till det givna indexet */
-    Node lastNode = list[size];
-    list[index] = lastNode;
+    Node lastNode = list.get(size);
+    list.set(index, lastNode);
     
     /* Sparar undan den flyttade nodens index i positionsmappen */
     positionMap.put(lastNode,index);
@@ -76,8 +76,8 @@ public class AHeap {
     int indexB = positionMap.get(b);
     
     /* sparar ner noderna på sina nya positioner */
-    list[indexB] = a;
-    list[indexA] = b;
+    list.set(indexB, a);
+    list.set(indexA, b);
     
     /* uppdaterar positionsmappen */
     positionMap.put(a,indexB);
@@ -90,17 +90,22 @@ public class AHeap {
   
   private Node getParent(Node n) {
     int index = positionMap.get(n);
-    return list[index/2];
+    return list.get(index/2);
   }
   
   private void bubbleIndex(int index){
-    bubble(positionMap.get(index));
-  }  
+    bubble(list.get(index));
+  } 
+  
+  private void bubble(Node n) {
+    bubbleUp(n);
+    bubbleDown(n);
+  }
   
   /* Flyttar en nod uppåt i heapen till rätt position */
   private void bubbleUp(Node n) {
     /* Om n är root avbryter vi */
-    if (list[1].equals(n)) {
+    if (list.get(1).equals(n)) {
       return;
     }
     
@@ -120,32 +125,31 @@ public class AHeap {
     int leftChildKey = leftChild(n).getKey();
     
     /* Om noden inte har ett högerbarn kollar vi om vänsterbarnet uppfyller heapvillkoret */
-    if (!hasRightChild) {
+    if (!hasRightChild(n)) {
       /* Om villkoret inte uppfylls swappar vi, annars vet vi att vi är klara */
       if (comparator.compare(leftChildKey, thisKey) < 0) {
-        swap(n,swapNode)
+        swap(n,leftChild(n));
         bubbleDown(n);
       } else {
         return;
       }
     /* Om noden har ett högerbarn jämför vi båda barn med n */
     } else {
-      int rightChildKey = rightChild(n).getKey();
-      /* Om något av barnen har lägre nyckel än n ska vi swappa */
-      if (comparator.compare(leftChildKey,thisKey) < 0 || comparator.compare(rightChildKey, thisKey) < 0) {
-        /* i swapNode lägger vi det barn som har lägst nyckel, och swappar sedan */
-        Node swapNode = comparator.compare(leftChild,rightChildKey) ? leftChild(n) : rightChild(n);
-        swap(n,swapNode);
-        bubbleDown(n);
-      } else {
-        return;
-      }
+          int rightChildKey = rightChild(n).getKey();
+          /* Om något av barnen har lägre nyckel än n ska vi swappa */
+          if ((comparator.compare(leftChildKey, thisKey) < 0) || (comparator.compare(rightChildKey, thisKey) < 0)){
+            Node swapNode = comparator.compare(leftChild,rightChildKey) ? leftChild(n) : rightChild(n);
+            swap(n,swapNode);
+            bubbleDown(n);
+          } else {
+            return;
+          }
     }
     
   }
   
   private boolean hasChildren(Node n) {
-    return positionMap.get(n)*2 <= size
+    return positionMap.get(n)*2 <= size;
   }
   
   private boolean hasRightChild(Node n) {
@@ -153,13 +157,13 @@ public class AHeap {
   }
   
   private Node leftChild(Node n) {
-    index = positionMap.get(n);
-    return list[index*2];
+    int index = positionMap.get(n);
+    return list.get(index*2);
   }
   
   private Node rightChild(Node n) {
-    index = positionMap.get(n);
-    return list[index*2 + 1];
+    int index = positionMap.get(n);
+    return list.get(index*2 + 1);
   }
   
   private int compareNodes(Node a, Node b) {

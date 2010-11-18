@@ -33,8 +33,10 @@ class Node {
     } else if (this == other) {
       return true;
     } else if (other instanceof Node) {
-      return (this.getKey() == other.getKey() && this.getValue() == other.getValue());
+      Node otherNode = (Node) other;
+      return (this.getKey() == otherNode.getKey() && this.getValue() == otherNode.getValue());
     }
+    return false;
   }
   
   public int hashCode() {
