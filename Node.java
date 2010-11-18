@@ -26,4 +26,18 @@ class Node {
   public String toString(){
     return "Tjohoo";
   }
+  
+  public boolean equals(Object other) {
+    if (other == null) {
+      return false;
+    } else if (this == other) {
+      return true;
+    } else if (other instanceof Node) {
+      return (this.getKey() == other.getKey() && this.getValue() == other.getValue());
+    }
+  }
+  
+  public int hashCode() {
+    return key + value.hashCode();
+  }
 }

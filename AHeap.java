@@ -1,3 +1,10 @@
+/** An adaptable heap. Uses ints as keys and strings as values.
+ *  @author Jesper Josefsson
+ *  @author Linus Oleander
+ */
+
+
+
 import java.util.*;
 
 public class AHeap {  
@@ -6,28 +13,42 @@ public class AHeap {
   private int size;
   private HashMap<String,Integer> positionMap;
   
+  /**
+   * @param comparator the comparator with which the elements are to be compared
+   */
+  
   public AHeap(Comparator comparator){
     this.comparator = comparator;
   }
   
   public void add(Node n){
-    
+    size++;
+    list[size] = n;
+    positionMap.put(n,size);
   }
   
   public int getSize(){
-    return 3;
+    return size;
   }
   
   public Node pull(){
-    return new Node("Testing", 3);
+    Node output = get(1);
+    remove(1);
+    return output;
   }
   
   public Node get(int index){
-    return new Node("Testing", 3);
+    if (index <= size && index > 0)
+      return list[index];
+    } else {
+      throw new IndexOutOfBoundsException("Error in: get")
+    }
   }
   
   public void update(Node old, Node update) throws GeneralException {
-    
+    int index = positionMap.get(old);
+    list[index] = update;
+    bubble(list[index]);
   }
   
   private void delete(int index){
