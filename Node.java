@@ -22,4 +22,8 @@ class Node {
   public void setKey(int key){
     this.key = key;
   }
+  
+  public String toString(){
+    return "Tjohoo";
+  }
 }

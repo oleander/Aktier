@@ -77,7 +77,7 @@ public class TestAHeap extends TestCase {
   public void testPull(){
     this.heap = new AHeap(new TestComp());
     
-    /* Hämtar vi första noden i heap:en så bör den retunera en tomt värde */
+    /* Hämtar vi första noden i heap:en så bör den retunera ett tomt värde */
     this.heap.update(this.heap.pull(), null);
     
     this.heap.add(this.nodes[0]);
@@ -103,11 +103,11 @@ public class TestAHeap extends TestCase {
   
   public static void main(String[] args){
     TestAHeap testAHeap = new TestAHeap();
-    //testAHeap.testAdd();
-    // testAHeap.testSize();
-    // testAHeap.testGet();
-    // testAHeap.testUpdate();
-    //testAHeap.testPull();
+    testAHeap.testAdd();
+    testAHeap.testSize();
+    testAHeap.testGet();
+    testAHeap.testUpdate();
+    testAHeap.testPull();
   }
   
 
