@@ -103,11 +103,42 @@ public class AHeap {
   }
   
   private void bubbleDown(Node n) {
-    if (hasChildren(n)) return;
+    if (!hasChildren(n)) return;
+    
+    int thisKey = n.getKey();
+    int leftChildKey = leftChild(n).getKey();
+    
+    /* Om noden inte har ett högerbarn kollar vi om vänsterbarnet uppfyller heapvillkoret */
+    if (!hasRightChild) {
+      /* Om villkoret inte uppfylls swappar vi, annars vet vi att vi är klara */
+      if (comparator.compare(leftChildKey, thisKey) < 0) {
+        swap(n,swapNode)
+        bubbleDown(n);
+      } else {
+        return;
+      }
+    /* Om noden har ett högerbarn jämför vi båda barn med n */
+    } else {
+      int rightChildKey = rightChild(n).getKey();
+      /* Om något av barnen har lägre nyckel än n ska vi swappa */
+      if (comparator.compare(leftChildKey,thisKey) < 0 || comparator.compare(rightChildKey, thisKey) < 0) {
+        /* i swapNode lägger vi det barn som har lägst nyckel, och swappar sedan */
+        Node swapNode = comparator.compare(leftChild,rightChildKey) ? leftChild(n) : rightChild(n);
+        swap(n,swapNode);
+        bubbleDown(n);
+      } else {
+        return;
+      }
+    }
+    
   }
   
   private boolean hasChildren(Node n) {
     return positionMap.get(n)*2 <= size
+  }
+  
+  private boolean hasRightChild(Node n) {
+    return positionMap.get(n)*2 + 1 <= size;
   }
   
   private Node leftChild(Node n) {

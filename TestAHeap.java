@@ -77,7 +77,7 @@ public class TestAHeap extends TestCase {
   public void testPull(){
     this.heap = new AHeap(new TestComp());
     
-    /* Hämtar vi första noden i heap:en så bör den retunera ett tomt värde */
+    /* Hämtar vi första noden i heap:en så bör den returnera ett tomt värde */
     this.heap.update(this.heap.pull(), null);
     
     this.heap.add(this.nodes[0]);
@@ -93,7 +93,7 @@ public class TestAHeap extends TestCase {
       this.heap.add(node);
     }
     
-    /* Pull bör retunera den första noden */
+    /* Pull bör returnera den första noden */
     assertEquals(this.heap.pull(), this.nodes[0]);
     
     /* Noden som ligger överst bör inte längre vara första noden */
