@@ -85,4 +85,42 @@ public class AHeap {
   private void bubbleIndex(int index){
     bubble(positionMap.get(index));
   }  
+  
+  /* Flyttar en nod uppåt i heapen till rätt position */
+  private void bubbleUp(Node n) {
+    /* Om n är root avbryter vi */
+    if (list[1].equals(n)) {
+      return;
+    }
+    
+    /* Annars tar vi fram n:s förälder och kollar heapvillkor
+     * Om villkoret ej uppfylls swappar vi och kör bubbleUp en gång till */
+    Node parent = this.getParent(n);
+    if (compareNodes(parent,n) > 0) {
+      swap(parent,n);
+      bubbleUp(n);
+    }
+  }
+  
+  private void bubbleDown(Node n) {
+    if (hasChildren(n)) return;
+  }
+  
+  private boolean hasChildren(Node n) {
+    return positionMap.get(n)*2 <= size
+  }
+  
+  private Node leftChild(Node n) {
+    index = positionMap.get(n);
+    return list[index*2];
+  }
+  
+  private Node rightChild(Node n) {
+    index = positionMap.get(n);
+    return list[index*2 + 1];
+  }
+  
+  private int compareNodes(Node a, Node b) {
+    return this.comparator.compare(a.getKey(),b.getKey());
+  }
 }
