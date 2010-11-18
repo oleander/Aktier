@@ -1,6 +1,6 @@
 import java.util.*;
 
-class AHeap {  
+public class AHeap {  
   private Comparator comparator;
   private ArrayList<Node> list;
   private int size;
@@ -14,11 +14,15 @@ class AHeap {
     
   }
   
+  public int getSize(){
+    return 3;
+  }
+  
   public Node pull(){
     return new Node("Testing", 3);
   }
   
-  private Node get(int index){
+  public Node get(int index){
     return new Node("Testing", 3);
   }
   
