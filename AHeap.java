@@ -3,8 +3,6 @@
  *  @author Linus Oleander
  */
 
-
-
 import java.util.*;
 
 public class AHeap {  
@@ -84,8 +82,8 @@ public class AHeap {
     positionMap.put(b,indexA);
   }
   
-  private int getParentIndex(int a){
-    return a/2;
+  private int getParentIndex(int childIndex){
+    return childIndex/2;
   }
   
   private Node getParent(Node n) {
@@ -137,8 +135,8 @@ public class AHeap {
     } else {
           int rightChildKey = rightChild(n).getKey();
           /* Om något av barnen har lägre nyckel än n ska vi swappa */
-          if ((comparator.compare(leftChildKey, thisKey) < 0) || (comparator.compare(rightChildKey, thisKey) < 0)){
-            Node swapNode = comparator.compare(leftChild,rightChildKey) ? leftChild(n) : rightChild(n);
+          if ((comparator.compare(leftChildKey, thisKey) < 0) || (comparator.compare(rightChildKey, thisKey) < 0)){
+            Node swapNode = comparator.compare(leftChildKey,rightChildKey) < 0 ? leftChild(n) : rightChild(n);
             swap(n,swapNode);
             bubbleDown(n);
           } else {
