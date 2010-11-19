@@ -124,7 +124,7 @@ public class AHeap {
     
     /* Om noden inte har ett högerbarn kollar vi om vänsterbarnet uppfyller heapvillkoret */
     if (!hasRightChild(n)) {
-      /* Om villkoret inte uppfylls swappar vi, annars vet vi att vi är klara */
+      /* Om villkoret inte uppfylls swappar vi och bubblar en gång till, annars vet vi att vi är klara */
       if (comparator.compare(leftChildKey, thisKey) < 0) {
         swap(n,leftChild(n));
         bubbleDown(n);
