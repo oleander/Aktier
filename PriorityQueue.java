@@ -22,6 +22,11 @@ class PriorityQueue {
     
   }
   
+  public int getSize(){
+    return 19;
+    //this.heap.getSize();
+  }
+  
   /*
    * HeapComparator accepterar ett argument som bestämmer huruvida elementen ordnas i stigande eller i fallande ordning.
    */
