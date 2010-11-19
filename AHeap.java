@@ -31,6 +31,7 @@ public class AHeap {
       list.set(size, n);
     }
     positionMap.put(n,size);
+    bubbleUp(n);
   }
   
   public int getSize(){
@@ -177,5 +178,9 @@ public class AHeap {
   
   private int compareNodes(Node a, Node b) {
     return this.comparator.compare(a.getKey(),b.getKey());
+  }
+  
+  public String toString() {
+    return this.list.toString();
   }
 }

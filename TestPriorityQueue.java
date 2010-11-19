@@ -21,9 +21,10 @@ public class TestPriorityQueue extends TestCase {
     /* Första värdet i listan bör nu inte längre vara noll */
     assertNotSame(this.pq.pull().getKey(), 0);
     
+    
     this.pq = new PriorityQueue(PriorityQueue.ASC);
     
-    for(int n = 0; n < 10; n++){
+    for(int n = 0; n <= 10; n++){
       this.pq.add("My super value: " + n, n);
     }
 
