@@ -17,12 +17,19 @@ public class AHeap {
   
   public AHeap(Comparator comparator){
     this.comparator = comparator;
-    size = 0;
+    this.size = 0;
+    this.list = new ArrayList<Node>();
+    this.list.add(new Node("My empty node", 0));
+    this.positionMap = new HashMap<Node,Integer>();
   }
   
   public void add(Node n){
     size++;
-    list.set(size, n);
+    if(this.list.size() <= size){
+     this.list.add(n);
+    } else {
+      list.set(size, n);
+    }
     positionMap.put(n,size);
   }
   
@@ -31,6 +38,8 @@ public class AHeap {
   }
   
   public Node pull(){
+    if(this.size == 0) return null;
+    
     Node output = get(1);
     delete(1);
     return output;
@@ -44,13 +53,15 @@ public class AHeap {
     }
   }
   
-  public void update(Node old, Node update) throws GeneralException {
+  public void update(Node old, int key) throws GeneralException {
     if (positionMap.get(old) == null) {
       throw new GeneralException("Error in update: Node not found!");
     } else {
     int index = positionMap.get(old);
-    list.set(index, update);
-    bubble(list.get(index));
+    this.positionMap.remove(old);
+    this.list.get(index).setKey(key);
+    this.positionMap.put(this.list.get(index),index);
+    this.bubble(list.get(index));
     }
   }
   

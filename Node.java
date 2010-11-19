@@ -24,7 +24,7 @@ class Node {
   }
   
   public String toString(){
-    return "Tjohoo";
+    return "value: " + this.value + ", key: " + Integer.toString(this.key);
   }
   
   public boolean equals(Object other) {

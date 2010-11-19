@@ -47,7 +47,7 @@ public class TestAHeap extends TestCase {
 
     /* Vi bör nu se alla noder som vi nyss adderade */
     for(int n = 0, stop = this.nodes.length; n < stop; n++){
-      assertEquals(this.nodes[n], this.heap.get(n));
+      assertEquals(this.nodes[n], this.heap.get(n + 1));
     }
     
   }
@@ -59,26 +59,26 @@ public class TestAHeap extends TestCase {
     for(Node node : this.nodes){
       this.heap.add(node);
     }
-    Node aNode = new Node("My new non existing heap node", 123);
+    Node aNode = new Node("My new non existing heap node", 12300);
     
     /* Försöker uppdatera en node som inte finns */
     try{
-      this.heap.update(aNode, this.nodes[9]);
+      this.heap.update(aNode, -2000);
       this.fail("Should raise an GeneralException");
     } catch(GeneralException e){}
     
-    /* Uppdaterar nod 5 med vår nya nod */
-    this.heap.update(this.nodes[5], aNode);
+    this.heap.add(aNode);
+        
+    this.heap.update(aNode, -10);
     
-    /* Vi bör nu hitta vår nya node på plats 5 */
-    assertEquals(aNode, this.heap.get(5));
+    assertEquals(this.heap.pull().getKey(), -10);
   }
   
   public void testPull(){
     this.heap = new AHeap(new TestComp());
     
     /* Hämtar vi första noden i heap:en så bör den returnera ett tomt värde */
-    this.heap.update(this.heap.pull(), null);
+    assertEquals(this.heap.pull(), null);
     
     this.heap.add(this.nodes[0]);
     
@@ -109,7 +109,4 @@ public class TestAHeap extends TestCase {
     testAHeap.testUpdate();
     testAHeap.testPull();
   }
-  
-
-  
 }
