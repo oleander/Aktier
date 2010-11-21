@@ -1,3 +1,5 @@
+/* En virtuell aktiebörs. Tar emot sälj- och köpbud, utför handel och returnerar resultat */
+
 class StockExchange {
   private PriorityQueue buyers;
   private PriorityQueue sellers;
