@@ -11,23 +11,22 @@ class StockExchange {
   
   /* Registrera en säljorder */
   public void registerSell(String name, int price) {
-    
+    sellers.add(name,price);
   }
   
   /* Registrera en köporder */
   public void registerBuy(String name, int price) {
-    
+    buyers.add(name,price);
   }
   
   /* Förändra en säljorder */
-  
   public void updateSell(String name, int oldPrice, int newPrice) {
-    
+    sellers.update(String name, int oldPrice, int newPrice);
   }
   
   /* Förändra en köporder */
   public void updateBuy(String name, int oldPrice, int newPrice) {
-    
+    buyers.update(String name, int oldPrice, int newPrice);
   }
   
   /* Utför alla köp som kan utföras. */

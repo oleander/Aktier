@@ -18,8 +18,8 @@ class PriorityQueue {
     this.heap.add(new Node(name,key));
   }
   
-  public void update(String name, int key){
-    this.heap.update(new Node(name,key),key);
+  public void update(String name, int oldKey, int newKey){
+    this.heap.update(new Node(name,oldKey), newKey);
   }
   
   public int getSize(){
