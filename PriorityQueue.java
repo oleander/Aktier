@@ -14,6 +14,10 @@ class PriorityQueue {
     return heap.pull();
   }
   
+  public void removeMin() {
+    heap.removeMin();
+  }
+  
   public void add(String name, int key){
     this.heap.add(new Node(name,key));
   }

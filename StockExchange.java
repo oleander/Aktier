@@ -38,6 +38,9 @@ class StockExchange {
   public void trade(){
     Node seller;
     Node buyer;
+    
+    /* Så länge köpbudet är högre eller lika med säljbudet och köp- eller säljkön inte är tom, 
+     * så fortsätter vi att para ihop deals */
     do {
       seller = sellers.peek();
       buyer = buyers.peek();

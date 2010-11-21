@@ -5,7 +5,7 @@
 
 import java.util.*;
 
-public class AHeap {  
+public class AHeap<T>{  
   private Comparator comparator;
   private ArrayList<Node> list;
   private int size;
@@ -18,9 +18,9 @@ public class AHeap {
   public AHeap(Comparator comparator){
     this.comparator = comparator;
     this.size = 0;
-    this.list = new ArrayList<Node>();
+    this.list = new ArrayList<T>();
     this.list.add(new Node("My empty node", 0));
-    this.positionMap = new HashMap<Node,Integer>();
+    this.positionMap = new HashMap<Node<T>,Integer>();
   }
   
   public void add(Node n){
@@ -86,11 +86,6 @@ public class AHeap {
     /* Ser till att den flyttade noden ligger på rätt ställe */
     bubbleDown(lastNode);
     bubbleUp(lastNode);
-  }
-  
-  /* Tar bort högst prioriterat element utan att returnera det */
-  public void removeMin(){
-    this.delete(1);
   }
   
   private void swap(Node a, Node b){
