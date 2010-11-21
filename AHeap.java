@@ -38,6 +38,10 @@ public class AHeap {
     return size;
   }
   
+  public boolean isEmpty() {
+    return size == 0;
+  }
+  
   public Node pull(){
     if(this.size == 0) return null;
     
@@ -47,6 +51,7 @@ public class AHeap {
   }
   
   public Node get(int index){
+    System.out.println("Index: " + index + ", size: " + this.size);
     if (index <= size && index > 0) {
       return list.get(index);
     } else {

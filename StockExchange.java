@@ -5,10 +5,13 @@ class StockExchange {
   private PriorityQueue buyers;
   private PriorityQueue sellers;
   private ArrayList<Deal> deals;
+  private String orderBook;
   
   public StockExchange() {
     buyers = new PriorityQueue(PriorityQueue.DESC);
     sellers = new PriorityQueue(PriorityQueue.ASC);
+    deals = new ArrayList<Deal>();
+    orderBook = "";
   }
   
   /* Registrera en säljorder */
@@ -34,16 +37,73 @@ class StockExchange {
   /* Utför alla köp som kan utföras. */
   public void trade(){
     Node seller;
-    Node buyer
+    Node buyer;
     do {
-      
-    }
+      seller = sellers.peek();
+      System.out.println(seller);
+      buyer = buyers.peek();
+      System.out.println(buyer);
+      if (buyer.getKey() >= seller.getKey()) {
+        deals.add(new Deal(buyer, seller));
+        System.out.println("Pulling buyers: ");
+        buyers.pull();
+        System.out.println("Pulling sellers: ");
+        sellers.pull();
+      }
+    } while (buyer.getKey() >= seller.getKey() && !(buyers.isEmpty() || sellers.isEmpty()));
   }
   
-  /* När handladet är avslutat konstrueras orderboken */
-  
+  /* När vi avslutar handlandet töms köerna och vi konstruerar orderboken */
   public void endTrading() {
+    ArrayList<Node> buyersLeft = new ArrayList<Node>();
+    ArrayList<Node> sellersLeft = new ArrayList<Node>();
+    Node n;
+    Node lastNode;
     
+    /* Om båda köerna är tomma behöver vi inte konstruera en orderbok */
+    if (buyers.isEmpty() && sellers.isEmpty()) {
+      return;
+    }
+  
+    /* Skapar listor av alla kvarvarande ordrar */
+    while (!sellers.isEmpty()) {
+      sellersLeft.add(sellers.pull());
+    }
+    while (!buyers.isEmpty()) {
+      buyersLeft.add(buyers.pull());
+    }
+    
+    /* Sparar undan storleken på listorna */
+    int buyersSize = buyersLeft.size();
+    int sellersSize = sellersLeft.size();
+    
+    orderBook = "Säljare: ";
+    
+    /* Om det finns oavslutade köpbud lägger vi till dem till orderboken */
+    if (sellersSize > 0) {
+      /* Lägger in alla säljbud utom det sista i orderboken */
+      for (int i = 0; i < sellersSize - 1; i++) {
+        n = sellersLeft.get(i);
+        orderBook += n.getValue() + " " + n.getKey() + ", ";
+      }
+      /* Lägger till det sista budet i orderboken */
+      lastNode = sellersLeft.get(sellersSize - 1);
+      orderBook += lastNode.getValue() + " " + lastNode.getKey();
+    }
+    
+    orderBook += "\nKöpare: ";
+    
+    /* Om det finns oavslutade köpbud lägger vi till dem i orderboken */
+    if (buyersSize > 0) {
+      /* Lägger in alla köpbud, utom det sista */
+      for (int i = 0; i < buyersSize - 1; i++) {
+        n = buyersLeft.get(i);
+        orderBook += n.getValue() + " " + n.getKey() + ", ";
+      }
+      /* Lägger till det sista budet i orderboken */
+      lastNode = buyersLeft.get(buyersSize - 1);
+      orderBook += lastNode.getValue() + " " + lastNode.getKey();
+    }
   }
   
   /* Returnerar sträng med alla köp som utfördes */
@@ -53,7 +113,7 @@ class StockExchange {
   
   /* Returnerar sträng med alla registrerade ordrar som inte utfördes */
   public String getOrderBook() {
-    return "order book";
+    return orderBook;
   }
   
   /* Inkapslar en genomförd affär */
@@ -67,7 +127,7 @@ class StockExchange {
     }
     
     public String toString() {
-      return buyer.getValue() + " köper från " + seller.getValue() + " för " + seller.getKey() + " kr";
+      return buyer.getValue() + " köper från " + seller.getValue() + " för " + buyer.getKey() + " kr";
     }
   }
   

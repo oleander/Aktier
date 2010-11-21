@@ -34,6 +34,10 @@ class PriorityQueue {
     return heap.peek();
   }
   
+  public boolean isEmpty() {
+    return heap.isEmpty();
+  }
+  
   /*
    * HeapComparator accepterar ett argument som bestämmer huruvida elementen ordnas i stigande eller i fallande ordning.
    */
