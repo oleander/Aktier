@@ -1,8 +1,10 @@
 /* En virtuell aktiebörs. Tar emot sälj- och köpbud, utför handel och returnerar resultat */
+import java.util.ArrayList;
 
 class StockExchange {
   private PriorityQueue buyers;
   private PriorityQueue sellers;
+  private ArrayList<Deal> deals;
   
   public StockExchange() {
     buyers = new PriorityQueue(PriorityQueue.DESC);
@@ -21,12 +23,12 @@ class StockExchange {
   
   /* Förändra en säljorder */
   public void updateSell(String name, int oldPrice, int newPrice) {
-    sellers.update(String name, int oldPrice, int newPrice);
+    sellers.update(name, oldPrice, newPrice);
   }
   
   /* Förändra en köporder */
   public void updateBuy(String name, int oldPrice, int newPrice) {
-    buyers.update(String name, int oldPrice, int newPrice);
+    buyers.update(name, oldPrice, newPrice);
   }
   
   /* Utför alla köp som kan utföras. */
@@ -42,7 +44,22 @@ class StockExchange {
   /* Returnerar sträng med alla registrerade ordrar som inte utfördes */
   public String getOrderBook() {
     return "order book";
-  } 
+  }
+  
+  /* Inkapslar en genomförd affär */
+  private class Deal{
+    private Node buyer;
+    private Node seller;
+    
+    public Deal(Node buyer, Node seller) {
+      this.buyer = buyer;
+      this.seller = seller;
+    }
+    
+    public String toString() {
+      return buyer.getValue() + " köper från " + seller.getValue() + " för " + seller.getKey() + " kr";
+    }
+  }
   
   
 }
