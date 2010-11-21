@@ -11,7 +11,7 @@ class TestStockExchange extends TestCase {
     se.registerSell("Test seller", 10);
     se.trade();
     se.endTrading();
-    String doneDeals = "Test buyer köper från Test seller för 10";
+    String doneDeals = "Test buyer köper från Test seller för 10 kr";
     assertEquals("", se.getOrderBook());
     assertEquals(doneDeals, se.getDoneDeals());
     
@@ -21,7 +21,7 @@ class TestStockExchange extends TestCase {
     se2.registerSell("Test seller", 10);
     se2.trade();
     se2.endTrading();
-    String orderBook = "Orderbok:\nSäljare: Test buyer 8\nKöpare: Test seller 10";
+    String orderBook = "Säljare: Test seller 10\nKöpare: Test buyer 8";
     assertEquals(orderBook, se2.getOrderBook()); 
     assertEquals("", se2.getDoneDeals());
   }
@@ -32,7 +32,7 @@ class TestStockExchange extends TestCase {
     h.se.updateSell("Test seller", 10, 1);
     h.se.trade();
     h.se.endTrading();
-    String doneDeals = "Test buyer köper från Test seller för 1";
+    String doneDeals = "Test buyer köper från Test seller för 1 kr";
     assertEquals(doneDeals, h.se.getDoneDeals());
     
     /* Testar updateBuy på samma sätt */
@@ -40,7 +40,7 @@ class TestStockExchange extends TestCase {
     h2.se.updateBuy("Test buyer", 1, 10);
     h2.se.trade();
     h2.se.endTrading();
-    String doneDeals2 = "Test buyer köper från Test seller för 10";
+    String doneDeals2 = "Test buyer köper från Test seller för 10 kr";
     assertEquals(doneDeals2, h2.se.getDoneDeals());
     
     

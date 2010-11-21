@@ -40,14 +40,10 @@ class StockExchange {
     Node buyer;
     do {
       seller = sellers.peek();
-      System.out.println(seller);
       buyer = buyers.peek();
-      System.out.println(buyer);
       if (buyer.getKey() >= seller.getKey()) {
         deals.add(new Deal(buyer, seller));
-        System.out.println("Pulling buyers: ");
         buyers.pull();
-        System.out.println("Pulling sellers: ");
         sellers.pull();
       }
     } while (buyer.getKey() >= seller.getKey() && !(buyers.isEmpty() || sellers.isEmpty()));
@@ -108,7 +104,11 @@ class StockExchange {
   
   /* Returnerar sträng med alla köp som utfördes */
   public String getDoneDeals() {
-    return "done deals";
+    String output = "";
+    for (Deal d : deals) {
+      output += d + "\n";
+    }
+    return output.trim();
   }
   
   /* Returnerar sträng med alla registrerade ordrar som inte utfördes */
