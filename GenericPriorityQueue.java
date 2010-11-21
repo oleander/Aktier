@@ -1,16 +1,16 @@
 import java.util.*;
 
-class PriorityQueue {
+class GenericPriorityQueue<T> {
   public static final boolean DESC = true;
   public static final boolean ASC = false;
   
-  private AHeap heap;
+  private GenericAdaptableHeap<T> heap;
   
-  public PriorityQueue(boolean desc){
-    this.heap = new AHeap(new HeapComparator(desc));
+  public GenericPriorityQueue(boolean desc){
+    this.heap = new GenericAdaptableHeap<T>(new HeapComparator(desc));
   }
   
-  public Node pull(){
+  public GenericNode pull(){
     return heap.pull();
   }
   
@@ -18,12 +18,12 @@ class PriorityQueue {
     heap.removeMin();
   }
   
-  public void add(String name, int key){
-    this.heap.add(new Node(name,key));
+  public void add(T value, int key){
+    this.heap.add(new GenericNode<T>(value,key));
   }
   
-  public void update(String name, int oldKey, int newKey){
-    this.heap.update(new Node(name,oldKey), newKey);
+  public void update(T value, int oldKey, int newKey){
+    this.heap.update(new GenericNode<T>(value,oldKey), newKey);
   }
   
   public int getSize(){
@@ -34,7 +34,7 @@ class PriorityQueue {
     return this.heap.toString();
   }
   
-  public Node peek() {
+  public GenericNode peek() {
     return heap.peek();
   }
   

@@ -2,9 +2,14 @@ class GenericNode<T> {
   private int key;
   private T value;
   
-  public Node(T value, int key){
+  public GenericNode(T value, int key){
     this.value = value;
     this.key = key;
+  }
+  
+  public GenericNode() {
+    value = null;
+    key = -100000;
   }
   
   public int getKey(){
