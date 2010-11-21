@@ -1,0 +1,3 @@
+rad 1
+rad 2
+rad 3
