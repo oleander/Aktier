@@ -54,6 +54,10 @@ public class AHeap {
     }
   }
   
+  public Node peek() {
+    return get(1);
+  }
+  
   public void update(Node old, int key) throws GeneralException {
     if (positionMap.get(old) == null) {
       throw new GeneralException("Error in update: Node not found!");

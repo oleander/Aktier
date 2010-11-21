@@ -30,6 +30,10 @@ class PriorityQueue {
     return this.heap.toString();
   }
   
+  public Node peek() {
+    return heap.peek();
+  }
+  
   /*
    * HeapComparator accepterar ett argument som bestämmer huruvida elementen ordnas i stigande eller i fallande ordning.
    */

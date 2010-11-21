@@ -9,7 +9,7 @@ class TestStockExchange extends TestCase {
     StockExchange se = new StockExchange();
     se.registerBuy("Test buyer", 10);
     se.registerSell("Test seller", 10);
-    se.performExchanges();
+    se.trade();
     String doneDeals = "Test buyer köper från Test seller för 10";
     assertEquals("", se.getOrderBook());
     assertEquals(doneDeals, se.getDoneDeals());
@@ -27,14 +27,14 @@ class TestStockExchange extends TestCase {
     /* Vi börjar med en lista med ett bud som går inte igenom och förändrar den så att budet går igenom */
     BasicHarness h = new BasicHarness();
     h.se.updateSell("Test seller", 10, 1);
-    h.se.performExchanges();
+    h.se.trade();
     String doneDeals = "Test buyer köper från Test seller för 1";
     assertEquals(doneDeals, h.se.getDoneDeals());
     
     /* Testar updateBuy på samma sätt */
     BasicHarness h2 = new BasicHarness();
     h2.se.updateBuy("Test buyer", 1, 10);
-    h2.se.performExchanges();
+    h2.se.trade();
     String doneDeals2 = "Test buyer köper från Test seller för 10";
     assertEquals(doneDeals2, h2.se.getDoneDeals());
     

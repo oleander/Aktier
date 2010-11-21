@@ -32,8 +32,18 @@ class StockExchange {
   }
   
   /* Utför alla köp som kan utföras. */
-  public void performExchanges(){
+  public void trade(){
+    Node seller;
+    Node buyer
+    do {
+      
+    }
+  }
   
+  /* När handladet är avslutat konstrueras orderboken */
+  
+  public void endTrading() {
+    
   }
   
   /* Returnerar sträng med alla köp som utfördes */
