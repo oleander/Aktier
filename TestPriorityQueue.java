@@ -44,7 +44,6 @@ public class TestPriorityQueue extends TestCase {
     Random random = new Random();
     this.pq = new PriorityQueue(PriorityQueue.DESC);
     int stop = random.nextInt(30);
-    
     for(int n = 0; n < stop; n++){
       this.pq.add("My super value: " + n, n);
     }

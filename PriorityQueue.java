@@ -23,8 +23,7 @@ class PriorityQueue {
   }
   
   public int getSize(){
-    return 19;
-    //this.heap.getSize();
+    return this.heap.getSize();
   }
   
   public String toString() {
