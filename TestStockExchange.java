@@ -21,8 +21,9 @@ class TestStockExchange extends TestCase {
     se2.registerSell("Test seller", 10);
     se2.trade();
     se2.endTrading();
-    String orderBook = "Säljare: Test seller 10\nKöpare: Test buyer 8";
-    assertEquals(orderBook, se2.getOrderBook()); 
+    
+    assertTrue(se2.getOrderBook().indexOf("Test seller 10") > 0);
+    assertTrue(se2.getOrderBook().indexOf("Test buyer 8") > 0);
     assertEquals("", se2.getDoneDeals());
   }
   

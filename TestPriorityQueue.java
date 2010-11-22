@@ -9,6 +9,7 @@ public class TestPriorityQueue extends TestCase {
   }
   
   public void testAddAndPull(){
+    this.pq = new PriorityQueue(PriorityQueue.ASC);
     
     /* Skapar 10 test-noder */
     for(int n = 0; n < 10; n++){
@@ -16,13 +17,13 @@ public class TestPriorityQueue extends TestCase {
     }
     
     /* Första värdet i PQ-listan borde ha en nyckel av värdet noll */
-    assertEquals(this.pq.pull().getKey(), 0);
+    assertEquals(0, this.pq.pull().getKey());
     
     /* Första värdet i listan bör nu inte längre vara noll */
-    assertNotSame(this.pq.pull().getKey(), 0);
+    assertNotSame(0, this.pq.pull().getKey());
     
     
-    this.pq = new PriorityQueue(PriorityQueue.ASC);
+    this.pq = new PriorityQueue(PriorityQueue.DESC);
     
     for(int n = 0; n <= 10; n++){
       this.pq.add("My super value: " + n, n);
@@ -53,7 +54,7 @@ public class TestPriorityQueue extends TestCase {
   }
   
   public void testUpdate(){
-    this.pq = new PriorityQueue(PriorityQueue.DESC);
+    this.pq = new PriorityQueue(PriorityQueue.ASC);
     for(int n = 0; n < 10; n++){
       this.pq.add("My super value: " + n, n);
     }
