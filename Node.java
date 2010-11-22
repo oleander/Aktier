@@ -1,4 +1,4 @@
-class Node {
+public class Node {
   private int key;
   private String value;
   

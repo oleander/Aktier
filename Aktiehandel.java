@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.io.File;
 import java.util.regex.*;
 
-class Aktiehandel {
+public class Aktiehandel {
   public static void main(String[] args) {
     ArrayList<String> input = new ArrayList<String>();
     StockExchange se = new StockExchange();

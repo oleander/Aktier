@@ -1,6 +1,6 @@
 import junit.framework.*;
 
-class TestStockExchange extends TestCase {
+public class TestStockExchange extends TestCase {
   
   /* Testar att det skapas orderböcker vid rätt tillfälle */
   public void testOrderBookAndDoneDeals(){

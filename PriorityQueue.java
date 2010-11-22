@@ -1,6 +1,6 @@
 import java.util.*;
 
-class PriorityQueue {
+public class PriorityQueue {
   public static final boolean DESC = false;
   public static final boolean ASC = true;
   

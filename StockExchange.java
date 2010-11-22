@@ -9,7 +9,7 @@ Då överförs alla kvarvarande ordrar till orderboken.
 */
 import java.util.ArrayList;
 
-class StockExchange {
+public class StockExchange {
   private PriorityQueue buyers;
   private PriorityQueue sellers;
   private ArrayList<Deal> deals;

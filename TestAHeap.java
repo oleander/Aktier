@@ -1,7 +1,7 @@
 import junit.framework.*;
 import java.util.*;
 
-public class TestAHeap extends TestCase {
+public public class TestAHeap extends TestCase {
   private AHeap heap;
   private Node[] nodes = new Node[10];
   

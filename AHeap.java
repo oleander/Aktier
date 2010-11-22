@@ -5,7 +5,7 @@
 
 import java.util.*;
 
-public class AHeap {  
+public public class AHeap {  
   private Comparator comparator;
   private ArrayList<Node> list;
   private int size;
