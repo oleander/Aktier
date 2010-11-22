@@ -49,13 +49,14 @@ public class PriorityQueue {
   }
   
   /**
+  * Räknar ut antalet personer i kön
   * @return Antalet personer i kön
   */
   public int getSize(){
     return this.heap.getSize();
   }
   
-  /**
+  /** 
    * @return Sträng-värdet av kön
    */
   public String toString() {
@@ -71,6 +72,7 @@ public class PriorityQueue {
   }
   
   /**
+  * Kontrollerar hurvida kön är tom eller ej
   * @return Sant om kön är tom
   */
   public boolean isEmpty() {

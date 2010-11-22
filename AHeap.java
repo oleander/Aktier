@@ -5,7 +5,7 @@
 
 import java.util.*;
 
-public public class AHeap {  
+public class AHeap {  
   private Comparator comparator;
   private ArrayList<Node> list;
   private int size;
@@ -24,7 +24,7 @@ public public class AHeap {
   
   /**
    * Gör det möjligt att lägga till noder i heapen
-   * @param Node {n} Noden som ska läggas till i kön
+   * @param n Noden som ska läggas till i kön
    */
   public void add(Node n){
     size++;
