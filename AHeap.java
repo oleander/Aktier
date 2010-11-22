@@ -14,7 +14,6 @@ public class AHeap {
   /**
    * @param comparator komparatorn som bestämmer vilket element är högst prioriterat
    */
-  
   public AHeap(Comparator comparator){
     this.comparator = comparator;
     this.size = 0;
@@ -23,6 +22,10 @@ public class AHeap {
     this.positionMap = new HashMap<Node,Integer>();
   }
   
+  /**
+   * Gör det möjligt att lägga till noder i heapen
+   * @param Node {n} Noden som ska läggas till i kön
+   */
   public void add(Node n){
     size++;
     if(this.list.size() <= size){
@@ -34,14 +37,28 @@ public class AHeap {
     bubbleUp(n);
   }
   
+  /**
+   * Storleken på heap
+   * @return int Storleken på heapen, där en tom heap har värdet 0 
+   */
   public int getSize(){
     return size;
   }
   
+  /**
+  * Kontrollerar hurvida heapen är tom eller ej
+  * @return True om heapen är tom
+  */
   public boolean isEmpty() {
     return size == 0;
   }
   
+  /**
+  * Hämtar första värden i heapen
+  * Är heapen tom så retunerar {null}
+  * Plockar även bort värdet från heapen
+  * @return Första värdet i heapen
+  */
   public Node pull(){
     if(this.size == 0) return null;
     
@@ -50,6 +67,12 @@ public class AHeap {
     return output;
   }
   
+  /**
+  * Hämtar Noden på plats {index} i heapen
+  * Plockar sedan bort värdet från heapen
+  * @param index Anger vilken nod som ska retunerars av heapen där 0 är första noden
+  * @return Noden som finns på plats {index}, finns inte noden så kastas ett fel
+  */
   public Node get(int index){
     if (index <= size && index > 0) {
       return list.get(index);
@@ -58,10 +81,20 @@ public class AHeap {
     }
   }
   
+  /**
+   * Hämtar, men tar inte bort första värdet från heapen
+   * @return Första värdet på heapen
+   */
   public Node peek() {
     return get(1);
   }
   
+  /**
+  * Uppdaterar en befintlig node i heapen
+  * Kastar ett fel om noden {old} inte finns i heapen
+  * @param old Noden som ska uppdateras
+  * @param key Nya värdet på noden
+  */
   public void update(Node old, int key) throws GeneralException {
     if (positionMap.get(old) == null) {
       throw new GeneralException("Error in update: Node not found!");
@@ -74,6 +107,8 @@ public class AHeap {
     }
   }
   
+  /* Plockar bort noden på plats {index}
+  */
   private void delete(int index){
     /* Kopierar den sista noden till det givna indexet */
     Node lastNode = list.get(size);
@@ -158,17 +193,16 @@ public class AHeap {
       }
     /* Om noden har ett högerbarn jämför vi båda barn med n */
     } else {
-          int rightChildKey = rightChild(n).getKey();
-          /* Om något av barnen har lägre nyckel än n ska vi swappa */
-          if ((comparator.compare(leftChildKey, thisKey) < 0) || (comparator.compare(rightChildKey, thisKey) < 0)){
-            Node swapNode = comparator.compare(leftChildKey,rightChildKey) < 0 ? leftChild(n) : rightChild(n);
-            swap(n,swapNode);
-            bubbleDown(n);
-          } else {
-            return;
-          }
+      int rightChildKey = rightChild(n).getKey();
+      /* Om något av barnen har lägre nyckel än n ska vi swappa */
+      if ((comparator.compare(leftChildKey, thisKey) < 0) || (comparator.compare(rightChildKey, thisKey) < 0)){
+        Node swapNode = comparator.compare(leftChildKey,rightChildKey) < 0 ? leftChild(n) : rightChild(n);
+        swap(n,swapNode);
+        bubbleDown(n);
+      } else {
+        return;
+      }
     }
-    
   }
   
   private boolean hasChildren(Node n) {
