@@ -11,11 +11,11 @@ class PriorityQueue {
   }
   
   public Node pull(){
-    return new Node("Hejsan", 3);
+    return this.heap.pull();
   }
   
   public void add(String name, int key){
-    
+    this.heap.add(new Node(name,key));
   }
   
   public void update(String name, int key){
@@ -23,8 +23,7 @@ class PriorityQueue {
   }
   
   public int getSize(){
-    return 19;
-    //this.heap.getSize();
+    return this.heap.getSize();
   }
   
   /*
@@ -36,7 +35,13 @@ class PriorityQueue {
       this.desc = desc;
     }
     public int compare(Integer a, Integer b) throws ClassCastException {
+      System.out.println(a);
+      System.out.println(b);
+      System.out.println(this.desc);
       int value = ((Comparable<Integer>) a).compareTo(b);
+      System.out.println((this.desc ? value : value*-1));
+      System.out.println(!this.desc ? value : value*-1);
+      System.out.println("-----------------------");
       return this.desc ? value : value*-1;
     }
   }

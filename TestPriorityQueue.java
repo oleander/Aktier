@@ -28,10 +28,10 @@ public class TestPriorityQueue extends TestCase {
     }
 
     /* Första värdet i PQ-listan borde ha en nyckel av värdet tio */
-    assertEquals(this.pq.pull().getKey(), 10);
+    assertEquals(10, this.pq.pull().getKey());
 
     /* Första värdet i listan bör nu inte längre vara tio */
-    assertNotSame(this.pq.pull().getKey(), 10);
+    assertNotSame(10, this.pq.pull().getKey());
     
     this.pq = new PriorityQueue(PriorityQueue.DESC);
     
@@ -76,8 +76,8 @@ public class TestPriorityQueue extends TestCase {
   public static void main(String[] args){
     TestPriorityQueue pq = new TestPriorityQueue();
     pq.testAddAndPull();
-    pq.testSize();
-    pq.testUpdate();
+    // pq.testSize();
+    // pq.testUpdate();
   }
   
 }
