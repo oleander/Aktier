@@ -1,21 +1,26 @@
-class Node {
+class GenericNode<T> {
   private int key;
-  private String value;
+  private T value;
   
-  public Node(String value, int key){
+  public GenericNode(T value, int key){
     this.value = value;
     this.key = key;
+  }
+  
+  public GenericNode() {
+    value = null;
+    key = -100000;
   }
   
   public int getKey(){
     return this.key;
   }
   
-  public String getValue(){
+  public T getValue(){
     return this.value;
   }
   
-  public void setValue(String value){
+  public void setValue(T value){
     this.value = value;
   }
   

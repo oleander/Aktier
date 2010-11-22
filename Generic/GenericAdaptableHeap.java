@@ -5,25 +5,25 @@
 
 import java.util.*;
 
-public class AHeap {  
+public class GenericAdaptableHeap<T>{  
   private Comparator comparator;
-  private ArrayList<Node> list;
+  private ArrayList<GenericNode<T>> list;
   private int size;
-  private HashMap<Node,Integer> positionMap;
+  private HashMap<GenericNode<T>,Integer> positionMap;
   
   /**
    * @param comparator komparatorn som bestämmer vilket element är högst prioriterat
    */
   
-  public AHeap(Comparator comparator){
+  public GenericAdaptableHeap(Comparator comparator){
     this.comparator = comparator;
     this.size = 0;
-    this.list = new ArrayList<Node>();
-    this.list.add(new Node("My empty node", 0));
-    this.positionMap = new HashMap<Node,Integer>();
+    this.list = new ArrayList<GenericNode<T>>();
+    this.list.add(new GenericNode<T>());
+    this.positionMap = new HashMap<GenericNode<T>,Integer>();
   }
   
-  public void add(Node n){
+  public void add(GenericNode n){
     size++;
     if(this.list.size() <= size){
      this.list.add(n);
@@ -42,15 +42,15 @@ public class AHeap {
     return size == 0;
   }
   
-  public Node pull(){
+  public GenericNode pull(){
     if(this.size == 0) return null;
     
-    Node output = get(1);
+    GenericNode output = get(1);
     delete(1);
     return output;
   }
   
-  public Node get(int index){
+  public GenericNode get(int index){
     if (index <= size && index > 0) {
       return list.get(index);
     } else {
@@ -58,13 +58,13 @@ public class AHeap {
     }
   }
   
-  public Node peek() {
+  public GenericNode peek() {
     return get(1);
   }
   
-  public void update(Node old, int key) throws GeneralException {
+  public void update(GenericNode old, int key) throws GeneralException {
     if (positionMap.get(old) == null) {
-      throw new GeneralException("Error in update: Node not found!");
+      throw new GeneralException("Error in update: GenericNode not found!");
     } else {
     int index = positionMap.get(old);
     this.positionMap.remove(old);
@@ -76,7 +76,7 @@ public class AHeap {
   
   private void delete(int index){
     /* Kopierar den sista noden till det givna indexet */
-    Node lastNode = list.get(size);
+    GenericNode lastNode = list.get(size);
     list.set(index, lastNode);
     
     /* Sparar undan den flyttade nodens index i positionsmappen */
@@ -88,12 +88,11 @@ public class AHeap {
     bubbleUp(lastNode);
   }
   
-  /* Tar bort högst prioriterat element utan att returnera det */
   public void removeMin(){
     this.delete(1);
   }
   
-  private void swap(Node a, Node b){
+  private void swap(GenericNode a, GenericNode b){
     /* Tar fram index för vardera nod */
     int indexA = positionMap.get(a);
     int indexB = positionMap.get(b);
@@ -111,7 +110,7 @@ public class AHeap {
     return childIndex/2;
   }
   
-  private Node getParent(Node n) {
+  private GenericNode getParent(GenericNode n) {
     int index = positionMap.get(n);
     return list.get(index/2);
   }
@@ -120,13 +119,13 @@ public class AHeap {
     bubble(list.get(index));
   } 
   
-  private void bubble(Node n) {
+  private void bubble(GenericNode n) {
     bubbleUp(n);
     bubbleDown(n);
   }
   
   /* Flyttar en nod uppåt i heapen till rätt position */
-  private void bubbleUp(Node n) {
+  private void bubbleUp(GenericNode n) {
     /* Om n är root avbryter vi */
     if (list.get(1).equals(n)) {
       return;
@@ -134,14 +133,14 @@ public class AHeap {
     
     /* Annars tar vi fram n:s förälder och kollar heapvillkor
      * Om villkoret ej uppfylls swappar vi och kör bubbleUp en gång till */
-    Node parent = this.getParent(n);
+    GenericNode parent = this.getParent(n);
     if (compareNodes(parent,n) > 0) {
       swap(parent,n);
       bubbleUp(n);
     }
   }
   
-  private void bubbleDown(Node n) {
+  private void bubbleDown(GenericNode n) {
     if (!hasChildren(n)) return;
     
     int thisKey = n.getKey();
@@ -161,7 +160,7 @@ public class AHeap {
           int rightChildKey = rightChild(n).getKey();
           /* Om något av barnen har lägre nyckel än n ska vi swappa */
           if ((comparator.compare(leftChildKey, thisKey) < 0) || (comparator.compare(rightChildKey, thisKey) < 0)){
-            Node swapNode = comparator.compare(leftChildKey,rightChildKey) < 0 ? leftChild(n) : rightChild(n);
+            GenericNode swapNode = comparator.compare(leftChildKey,rightChildKey) < 0 ? leftChild(n) : rightChild(n);
             swap(n,swapNode);
             bubbleDown(n);
           } else {
@@ -171,25 +170,25 @@ public class AHeap {
     
   }
   
-  private boolean hasChildren(Node n) {
+  private boolean hasChildren(GenericNode n) {
     return positionMap.get(n)*2 <= size;
   }
   
-  private boolean hasRightChild(Node n) {
+  private boolean hasRightChild(GenericNode n) {
     return positionMap.get(n)*2 + 1 <= size;
   }
   
-  private Node leftChild(Node n) {
+  private GenericNode leftChild(GenericNode n) {
     int index = positionMap.get(n);
     return list.get(index*2);
   }
   
-  private Node rightChild(Node n) {
+  private GenericNode rightChild(GenericNode n) {
     int index = positionMap.get(n);
     return list.get(index*2 + 1);
   }
   
-  private int compareNodes(Node a, Node b) {
+  private int compareNodes(GenericNode a, GenericNode b) {
     return this.comparator.compare(a.getKey(),b.getKey());
   }
   

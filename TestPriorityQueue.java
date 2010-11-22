@@ -21,9 +21,10 @@ public class TestPriorityQueue extends TestCase {
     /* Första värdet i listan bör nu inte längre vara noll */
     assertNotSame(this.pq.pull().getKey(), 0);
     
+    
     this.pq = new PriorityQueue(PriorityQueue.ASC);
     
-    for(int n = 0; n < 10; n++){
+    for(int n = 0; n <= 10; n++){
       this.pq.add("My super value: " + n, n);
     }
 
@@ -43,7 +44,6 @@ public class TestPriorityQueue extends TestCase {
     Random random = new Random();
     this.pq = new PriorityQueue(PriorityQueue.DESC);
     int stop = random.nextInt(30);
-    
     for(int n = 0; n < stop; n++){
       this.pq.add("My super value: " + n, n);
     }
@@ -58,7 +58,7 @@ public class TestPriorityQueue extends TestCase {
       this.pq.add("My super value: " + n, n);
     }
     
-    this.pq.update("My super value: 3", -10);
+    this.pq.update("My super value: 3", 3, -10);
     
     /* Kontrollerar att vårt nya värde finns i listan */
     assertEquals(this.pq.pull().getKey(), -10);
@@ -68,7 +68,7 @@ public class TestPriorityQueue extends TestCase {
     
     this.pq = new PriorityQueue(PriorityQueue.DESC);
     try{
-      this.pq.update("My super value: 3", -10);
+      this.pq.update("My super value: 3", 3,-10);
       fail("Should throw GeneralException");
     } catch(GeneralException e){}
   }
@@ -76,8 +76,8 @@ public class TestPriorityQueue extends TestCase {
   public static void main(String[] args){
     TestPriorityQueue pq = new TestPriorityQueue();
     pq.testAddAndPull();
-    // pq.testSize();
-    // pq.testUpdate();
+    pq.testSize();
+    pq.testUpdate();
   }
   
 }
