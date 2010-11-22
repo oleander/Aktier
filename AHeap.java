@@ -63,7 +63,7 @@ public class AHeap {
     if(this.size == 0) return null;
     
     Node output = get(1);
-    delete(1);
+    this.delete(1);
     return output;
   }
   
@@ -75,7 +75,7 @@ public class AHeap {
   */
   public Node get(int index){
     if (index <= size && index > 0) {
-      return list.get(index);
+      return this.list.get(index);
     } else {
       throw new IndexOutOfBoundsException("Error in: get");
     }
@@ -86,7 +86,7 @@ public class AHeap {
    * @return Första värdet på heapen
    */
   public Node peek() {
-    return get(1);
+    return this.get(1);
   }
   
   /**
@@ -156,8 +156,8 @@ public class AHeap {
   } 
   
   private void bubble(Node n) {
-    bubbleUp(n);
-    bubbleDown(n);
+    this.bubbleUp(n);
+    this.bubbleDown(n);
   }
   
   /* Flyttar en nod uppåt i heapen till rätt position */
