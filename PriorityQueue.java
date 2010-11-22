@@ -6,40 +6,75 @@ class PriorityQueue {
   
   private AHeap heap;
   
+  /**
+  * @param desc Anger hurvida PriorityQueue ska vara fallande eller stigande
+  */
   public PriorityQueue(boolean desc){
     this.heap = new AHeap(new HeapComparator(desc));
   }
   
+  /**
+  * Hämtar första värdet i kön
+  * Värdet plockas sedan bort
+  * @return en Node som ligger första på heapen
+  */
   public Node pull(){
     return this.heap.pull();
   }
   
+  /**
+  * Plockar bort minsta värdet på heapen
+  */
   public void removeMin() {
     this.heap.removeMin();
   }
   
+  /**
+  * Lägger till ett värde med angiven nyckel i kön
+  * @param name Namnet, i vårt fall, på personen som ska placeras i kön
+  * @param key Värdet på personen, i vårt fall värdet på aktien som personen har köpt eller sålt
+  */
   public void add(String name, int key){
     this.heap.add(new Node(name,key));
   }
   
+  /**
+  * Uppdaterar ett befintligt värde i kön
+  * @param name Namnet på personen som ska ändras
+  * @param oldKey Föregående nyckel, alltså samma nyckel som angavs i {add()}
+  * @param newKey Användarens nya nyckel
+  */
   public void update(String name, int oldKey, int newKey){
     this.heap.update(new Node(name,oldKey), newKey);
   }
   
+  /**
+  * @return Antalet personer i kön
+  */
   public int getSize(){
     return this.heap.getSize();
   }
   
+  /**
+   * @return Sträng-värdet av kön
+   */
   public String toString() {
     return this.heap.toString();
   }
   
+  /**
+   * Hämtar, men tar inte bort första värdet från kön
+   * @return Första värdet på heapen
+   */
   public Node peek() {
-    return heap.peek();
+    return this.heap.peek();
   }
   
+  /**
+  * @return Sant om kön är tom
+  */
   public boolean isEmpty() {
-    return heap.isEmpty();
+    return this.heap.isEmpty();
   }
   
   /*
