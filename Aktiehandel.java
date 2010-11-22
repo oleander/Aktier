@@ -1,9 +1,12 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 import java.io.File;
 import java.util.regex.*;
 
 public class Aktiehandel {
+  
   public static void main(String[] args) {
     ArrayList<String> input = new ArrayList<String>();
     StockExchange se = new StockExchange();
