@@ -1,3 +1,4 @@
-rad 1
-rad 2
-rad 3
+Alice K 80
+Bob S 80
+Alice NK 80 90
+Bob NS 80 90
