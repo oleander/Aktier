@@ -1,15 +1,16 @@
-/* 
-En virtuell aktiebörs. Tar emot sälj- och köpbud, utför handel och returnerar resultat.
-Först registras köp- och säljordrar, samt förändrade ordrar.
-Sedan utförs handel med hjälp av metoden "trading".
-När trading anropas utförs alla köp som är möjliga och införs i listan över utförda köp.
-Efter trading är resten av ordrarna kvar i kön och man kan således registrera nya ordrar och utföra mera trading.
-När handeln är avslutat anropas endTrading.
-Då överförs alla kvarvarande ordrar till orderboken.
-*/
 import java.util.ArrayList;
 
-class StockExchange {
+/**
+ * En virtuell aktiebörs. Tar emot sälj- och köpbud, utför handel och returnerar resultat.
+ * Först registras köp- och säljordrar, samt förändrade ordrar.
+ * Sedan utförs handel med hjälp av metoden "trading".
+ * När trading anropas utförs alla köp som är möjliga och införs i listan över utförda köp.
+ * Efter trading är resten av ordrarna kvar i kön och man kan således registrera nya ordrar och utföra mera trading.
+ * När handeln är avslutat anropas endTrading.
+ * Då överförs alla kvarvarande ordrar till orderboken.
+ */
+ 
+public class StockExchange {
   private PriorityQueue buyers;
   private PriorityQueue sellers;
   private ArrayList<Deal> deals;
@@ -22,27 +23,49 @@ class StockExchange {
     orderBook = "";
   }
   
-  /* Registrera en säljorder */
+  /** 
+   * Registrera en säljorder 
+   * @param name Namnet på säljaren
+   * @param price Priset
+   */
   public void registerSell(String name, int price) {
     sellers.add(name,price);
   }
   
-  /* Registrera en köporder */
+  /**
+   * Registrera en köporder
+   * @param name Namnet på säljaren
+   * @param price Priset
+   */
   public void registerBuy(String name, int price) {
     buyers.add(name,price);
   }
   
-  /* Förändra en säljorder */
+  /** 
+   * Förändra en säljorder
+   * @param name Namnet på säljaren
+   * @param oldPrice Det gamla priset
+   * @param newPrice Det nya priset
+   */
   public void updateSell(String name, int oldPrice, int newPrice) {
     sellers.update(name, oldPrice, newPrice);
   }
   
-  /* Förändra en köporder */
+  /** 
+   * Förändra en köporder
+   * @param name Namnet på köparen
+   * @param oldPrice Det gamla priset
+   * @param newPrice Det nya priset
+   */
   public void updateBuy(String name, int oldPrice, int newPrice) {
     buyers.update(name, oldPrice, newPrice);
   }
   
-  /* Utför alla köp som kan utföras. */
+  /**
+   * Utför alla köp som kan utföras och sparar dem. 
+   * Kön innehåller fortfarande alla ordrar som inte uppfyllts.
+   * Listan med uförda ordrar kommer man åt med getDoneDeals()
+   */
   public void trade(){
     Node seller;
     Node buyer;
@@ -60,7 +83,10 @@ class StockExchange {
     } while (buyer.getKey() >= seller.getKey() && !(buyers.isEmpty() || sellers.isEmpty()));
   }
   
-  /* När vi avslutar handlandet töms köerna och vi konstruerar orderboken */
+  /** 
+   * När vi avslutar handlandet töms köerna och vi konstruerar orderboken. 
+   * Orderbooken kommer man åt med getOrderBook()
+   */
   public void endTrading() {
     ArrayList<Node> buyersLeft = new ArrayList<Node>();
     ArrayList<Node> sellersLeft = new ArrayList<Node>();
@@ -113,7 +139,10 @@ class StockExchange {
     }
   }
   
-  /* Returnerar sträng med alla köp som utfördes */
+  /**
+   * Returnerar sträng med alla köp som utfördes.
+   * @return Alla utförda köp
+   */
   public String getDoneDeals() {
     String output = "";
     for (Deal d : deals) {
@@ -122,7 +151,10 @@ class StockExchange {
     return output.trim();
   }
   
-  /* Returnerar sträng med alla registrerade ordrar som inte utfördes */
+  /**
+   * Returnerar sträng med alla registrerade ordrar som inte utfördes
+   * @return Orderboken 
+   */
   public String getOrderBook() {
     return orderBook;
   }

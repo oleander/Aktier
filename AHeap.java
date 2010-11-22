@@ -42,6 +42,7 @@ public class AHeap {
     return size == 0;
   }
   
+  /*  */
   public Node pull(){
     if(this.size == 0) return null;
     
@@ -50,6 +51,7 @@ public class AHeap {
     return output;
   }
   
+  /* Returnerar noden vid ett givet index utan att ta bort den från listan */
   public Node get(int index){
     if (index <= size && index > 0) {
       return list.get(index);
@@ -58,10 +60,16 @@ public class AHeap {
     }
   }
   
+  /* Returnerar den högst prioriterade noden utan att ta bort den från listan */
   public Node peek() {
     return get(1);
   }
   
+  /** 
+   * Uppdaterar nyckeln på en nod 
+   * @param old Noden som skall förändras
+   * @param key Den nya nyckeln
+   */
   public void update(Node old, int key) throws GeneralException {
     if (positionMap.get(old) == null) {
       throw new GeneralException("Error in update: Node not found!");
@@ -88,11 +96,14 @@ public class AHeap {
     bubbleUp(lastNode);
   }
   
-  /* Tar bort högst prioriterat element utan att returnera det */
+  /** 
+   * Tar bort högst prioriterat element utan att returnera det 
+   */
   public void removeMin(){
     this.delete(1);
   }
   
+  /* Byter plats på två noder */
   private void swap(Node a, Node b){
     /* Tar fram index för vardera nod */
     int indexA = positionMap.get(a);
@@ -107,19 +118,12 @@ public class AHeap {
     positionMap.put(b,indexA);
   }
   
-  private int getParentIndex(int childIndex){
-    return childIndex/2;
-  }
-  
   private Node getParent(Node n) {
     int index = positionMap.get(n);
     return list.get(index/2);
   }
   
-  private void bubbleIndex(int index){
-    bubble(list.get(index));
-  } 
-  
+  /* Utför både nedåt- och uppåtbubbling */
   private void bubble(Node n) {
     bubbleUp(n);
     bubbleDown(n);
@@ -141,6 +145,7 @@ public class AHeap {
     }
   }
   
+  /* Ser till att en nod är på rätt ställe i trädet genom att flytta den nedåt i trädet */
   private void bubbleDown(Node n) {
     if (!hasChildren(n)) return;
     
@@ -189,10 +194,14 @@ public class AHeap {
     return list.get(index*2 + 1);
   }
   
+  /* Jämför nycklarna på två noder */
   private int compareNodes(Node a, Node b) {
     return this.comparator.compare(a.getKey(),b.getKey());
   }
   
+  /**
+   * @return String en strängrepresentation av heapen
+   */
   public String toString() {
     return this.list.toString();
   }
