@@ -1,4 +1,12 @@
-/* En virtuell aktiebörs. Tar emot sälj- och köpbud, utför handel och returnerar resultat */
+/* 
+En virtuell aktiebörs. Tar emot sälj- och köpbud, utför handel och returnerar resultat.
+Först registras köp- och säljordrar, samt förändrade ordrar.
+Sedan utförs handel med hjälp av metoden "trading".
+När trading anropas utförs alla köp som är möjliga och införs i listan över utförda köp.
+Efter trading är resten av ordrarna kvar i kön och man kan således registrera nya ordrar och utföra mera trading.
+När handeln är avslutat anropas endTrading.
+Då överförs alla kvarvarande ordrar till orderboken.
+*/
 import java.util.ArrayList;
 
 class StockExchange {
@@ -76,7 +84,7 @@ class StockExchange {
     int buyersSize = buyersLeft.size();
     int sellersSize = sellersLeft.size();
     
-    orderBook = "Säljare: ";
+    orderBook = "Orderbok:\nSäljare: ";
     
     /* Om det finns oavslutade köpbud lägger vi till dem till orderboken */
     if (sellersSize > 0) {

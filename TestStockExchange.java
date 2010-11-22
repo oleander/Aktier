@@ -59,5 +59,6 @@ class TestStockExchange extends TestCase {
   public static void main(String[] args) {
     TestStockExchange test = new TestStockExchange();
     test.testOrderBookAndDoneDeals();
+    test.testUpdate();
   }
 }

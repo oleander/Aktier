@@ -1,8 +1,8 @@
 import java.util.*;
 
 class PriorityQueue {
-  public static final boolean DESC = true;
-  public static final boolean ASC = false;
+  public static final boolean DESC = false;
+  public static final boolean ASC = true;
   
   private AHeap heap;
   
@@ -11,11 +11,11 @@ class PriorityQueue {
   }
   
   public Node pull(){
-    return heap.pull();
+    return this.heap.pull();
   }
   
   public void removeMin() {
-    heap.removeMin();
+    this.heap.removeMin();
   }
   
   public void add(String name, int key){
