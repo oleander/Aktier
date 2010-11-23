@@ -86,6 +86,9 @@ public class AHeap {
    * @return Första värdet på heapen
    */
   public Node peek() {
+    if (this.size == 0) {
+      throw new GeneralException("Heap empty");
+    }
     return this.get(1);
   }
 

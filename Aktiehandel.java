@@ -22,6 +22,12 @@ public class Aktiehandel {
         s = new Scanner(new File (args[0]));
       }
       
+      /* Fångar tom input */
+      if (!s.hasNextLine()) {
+        System.err.print("Error: input is empty.");
+        System.exit(1);
+      }
+      
       /* Kontrollerar varje rad i vårt ingående dokument */
       while (s.hasNextLine()) {
         buffer = s.nextLine();
@@ -48,14 +54,14 @@ public class Aktiehandel {
           case 83   : se.registerSell(m.group(1), Integer.valueOf(m.group(3))); break;
           default   : System.out.println("Error in input: " + buffer);
         }
+        
+        /* Utför möjliga köp */
+        se.trade();
       }
     } catch (Exception e) {
       e.printStackTrace();
       System.out.println(e.getMessage());
     }
-    
-    /* Utför våra deal */
-    se.trade();
 
     /* Tömmer alla köper och konstruerar vår loggbok */
     se.endTrading();

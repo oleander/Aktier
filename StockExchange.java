@@ -70,6 +70,10 @@ public class StockExchange {
     Node seller;
     Node buyer;
     
+    if (sellers.isEmpty() || buyers.isEmpty()) {
+      return;
+    }
+    
     /* Så länge köpbudet är högre eller lika med säljbudet och köp- eller säljkön inte är tom, 
      * så fortsätter vi att para ihop deals */
     do {
